@@ -3,10 +3,10 @@ SELECT
     m.medicine_id,
     m.medicine_name,
     m.purpose,
-    mg.group_name,
+    mf.manufacturer_name,
     m.unit,
     m.purchase_price,
     m.selling_price
 FROM Medicine m
-JOIN Medicine_group mg ON m.group_id = mg.group_id
-WHERE m.group_id = 5;
+JOIN Manufacturer mf ON m.manufacturer_id = mf.manufacturer_id
+WHERE m.manufacturer_id = 1;
