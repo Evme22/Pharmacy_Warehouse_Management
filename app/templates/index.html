@@ -1,1 +1,95 @@
+{% extends 'layout.html' %}
 
+{% block content %}
+<h2>Добро пожаловать, {{ session['username'] }}</h2>
+
+<p>Вы вошли как: <strong>{{ session['role'] }}</strong></p>
+
+<div class="row">
+    {% if session['role'] == 'db_admin' %}
+        <div class="col-md-4 mb-2">
+            <a href="/table/Warehouse_stock" class="btn btn-outline-primary w-100">Остатки на складе</a>
+        </div>
+        <div class="col-md-4 mb-2">
+            <a href="/table/Supply_to_pharmacy" class="btn btn-outline-primary w-100">Поставки в филиалы</a>
+        </div>
+        <div class="col-md-4 mb-2">
+            <a href="/table/Supply_pharmacy_items" class="btn btn-outline-primary w-100">Препараты в поставке (в филиал)</a>
+        </div>
+        <div class="col-md-4 mb-2">
+            <a href="/table/Supply_warehouse_items" class="btn btn-outline-primary w-100">Препараты в поставке (на склад)</a>
+        </div>
+        <div class="col-md-4 mb-2">
+            <a href="/table/Supply_to_warehouse" class="btn btn-outline-primary w-100">Поставки на склад</a>
+        </div>
+        <div class="col-md-4 mb-2">
+            <a href="/table/Supplier" class="btn btn-outline-primary w-100">Поставщики</a>
+        </div>
+        <div class="col-md-4 mb-2">
+            <a href="/table/Medicine" class="btn btn-outline-primary w-100">Препараты</a>
+        </div>
+        <div class="col-md-4 mb-2">
+            <a href="/table/Pharmacy" class="btn btn-outline-primary w-100">Аптеки</a>
+        </div>
+        <div class="col-md-4 mb-2">
+            <a href="/table/Warehouse" class="btn btn-outline-primary w-100">Склады</a>
+        </div>
+        <div class="col-md-4 mb-2">
+            <a href="/table/Warehouse_employee" class="btn btn-outline-primary w-100">Сотрудники</a>
+        </div>
+        <div class="col-md-4 mb-2">
+            <a href="/procedures" class="btn btn-outline-primary w-100">Вызов процедур</a>
+        </div>
+        <div class="col-md-4 mb-2">
+            <a href="/analytics" class="btn btn-outline-primary w-100">Аналитика</a>
+        </div>
+
+    {% endif %}
+
+    {% if session['role'] == 'director' %}
+        <div class="col-md-4 mb-2">
+            <a href="/table/Supplier" class="btn btn-outline-primary w-100">Поставщики</a>
+        </div>
+        <div class="col-md-4 mb-2">
+            <a href="/table/Supply_to_warehouse" class="btn btn-outline-primary w-100">Поставки на склад</a>
+        </div>
+        <div class="col-md-4 mb-2">
+            <a href="/table/Supply_warehouse_items" class="btn btn-outline-primary w-100">Препараты в поставке (на склад)</a>
+        </div>
+        <div class="col-md-4 mb-2">
+            <a href="/procedures" class="btn btn-outline-primary w-100">Вызов процедур</a>
+        </div>
+        <div class="col-md-4 mb-2">
+            <a href="/analytics" class="btn btn-outline-primary w-100">Аналитика</a>
+        </div>
+
+    {% endif %}
+
+    {% if session['role'] == 'warehouse_clerk' %}
+        <div class="col-md-4 mb-2">
+            <a href="/table/Warehouse_stock" class="btn btn-outline-primary w-100">Остатки на складе</a>
+        </div>
+        <div class="col-md-4 mb-2">
+            <a href="/table/Supply_to_pharmacy" class="btn btn-outline-primary w-100">Поставки в филиалы</a>
+        </div>
+        <div class="col-md-4 mb-2">
+            <a href="/table/Supply_pharmacy_items" class="btn btn-outline-primary w-100">Препараты в поставке (в филиал)</a>
+        </div>
+        <div class="col-md-4 mb-2">
+            <a href="/table/Supply_warehouse_items" class="btn btn-outline-primary w-100">Препараты в поставке (на склад)</a>
+        </div>
+        <div class="col-md-4 mb-2">
+            <a href="/table/Supply_to_warehouse" class="btn btn-outline-primary w-100">Поставки на склад</a>
+        </div>
+        <div class="col-md-4 mb-2">
+            <a href="/procedures" class="btn btn-outline-primary w-100">Вызов процедур</a>
+        </div>
+        <div class="col-md-4 mb-2">
+            <a href="/analytics" class="btn btn-outline-primary w-100">Аналитика</a>
+        </div>
+
+    {% endif %}
+</div>
+
+<a href="/logout" class="btn btn-secondary mt-4">Выйти</a>
+{% endblock %}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Аптечный склад</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        /* Фон всей страницы */
+        body {
+            background-color: #E6E6FA;
+            color: #483D8B;
+        }
+
+        /* Заголовки */
+        h1, h2, h3 {
+            color: #483D8B;
+        }
+
+        /* Кнопки — сиреневые, чтобы сочетались */
+        .btn-outline-primary {
+            color: #483D8B;
+            border-color: #483D8B;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: #483D8B;
+            color: white;
+        }
+
+        /* Таблица */
+        .table th {
+            background-color: #483D8B;
+            color: white;
+        }
+
+        .table td {
+            color: #483D8B;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body class="container mt-4">
+    <h1>Система аптечного склада</h1>
+    <hr>
+    {% block content %}{% endblock %}
+</body>
+</html>

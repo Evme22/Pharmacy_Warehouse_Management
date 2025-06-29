@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>Аналитика</h2>
+
+<h4>Динамика поставок по датам</h4>
+<canvas id="lineChart" class="mb-5"></canvas>
+
+<h4>Топ-10 препаратов по объёму поставок</h4>
+<canvas id="barChart" class="mb-5"></canvas>
+
+<h4>Доля поставок по группам препаратов</h4>
+<canvas id="pieChart" class="mb-5"></canvas>
+
+<script>
+    //Линейный график
+    const lineChart = new Chart(document.getElementById('lineChart'), {
+        type: 'line',
+        data: {
+            labels: {{ dates|tojson }},
+            datasets: [{
+                label: 'Объём поставок',
+                data: {{ amounts|tojson }},
+                borderColor: '#483D8B',
+                backgroundColor: 'rgba(72, 61, 139, 0.2)',
+                tension: 0.4
+            }]
+        }
+    });
+
+    //Гистограмма
+    const barChart = new Chart(document.getElementById('barChart'), {
+        type: 'bar',
+        data: {
+            labels: {{ top_labels|tojson }},
+            datasets: [{
+                label: 'Количество поставок',
+                data: {{ top_values|tojson }},
+                backgroundColor: '#483D8B'
+            }]
+        },
+        options: {
+            indexAxis: 'y'
+        }
+    });
+
+    //Круговая диаграмма
+    const pieChart = new Chart(document.getElementById('pieChart'), {
+        type: 'pie',
+        data: {
+            labels: {{ pie_labels|tojson }},
+            datasets: [{
+                data: {{ pie_values|tojson }},
+                backgroundColor: ['#DA70D6', '#BA55D3', '#DDA0DD', '#E6E6FA', '#483D8B', '#CD5C5C']
+            }]
+        }
+    });
+</script>
+<a href="/" class="btn btn-secondary mt-4">Назад</a>
+{% endblock %}
