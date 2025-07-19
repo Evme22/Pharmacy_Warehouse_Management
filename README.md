@@ -39,7 +39,35 @@
 ---
 
 ## Структура проекта
-<pre lang="text"><code> ```text Pharmacy_Warehouse_Management/ │ ├── database/ → SQL-скрипты для создания базы, процедур и триггеров │ ├── create_schema.sql # Структура таблиц и связей │ ├── insert_data.sql # Наполнение базы данными │ ├── procedures.sql # Хранимые процедуры │ ├── triggers.sql # Триггеры базы данных │ ├── user_roles.sql # Создание пользователей и назначение ролей │ └── queries.sql # Примеры SQL-запросов │ ├── er_diagram/ → Диаграмма сущностей и связей │ └── er_diagram.png │ ├── app/ → Веб-приложение на Flask │ ├── app.py # Главный файл запуска приложения │ ├── db.py # Подключение к базе данных │ ├── .env.example # Пример конфигурационного файла │ ├── templates/ # HTML-шаблоны (Jinja2) │ └── static/ # CSS, JS, изображения (если есть) │ ├── requirements.txt → Зависимости Python └── README.md → Этот файл ``` </code></pre>
+```text
+Pharmacy_Warehouse_Management/
+│
+├── database/              → SQL-скрипты для создания базы, процедур и триггеров
+│   ├── create_schema.sql         # Структура таблиц и связей
+│   ├── insert_data.sql           # Наполнение базы тестовыми данными
+│   ├── procedures.sql            # Хранимые процедуры
+│   ├── triggers.sql              # Триггеры
+│   ├── user_roles.sql            # Создание пользователей и прав доступа
+│   └── queries.sql               # Примеры аналитических SQL-запросов
+│
+├── er_diagram/
+│   └── er_diagram.png            # ER-диаграмма (структура базы)
+│
+├── app/                          → Веб-приложение на Flask
+│   ├── app.py                    # Точка входа в приложение
+│   ├── db.py                     # Работа с подключением к БД
+│   ├── .env.example              # Пример .env файла для конфигурации
+│   ├── templates/                # HTML-шаблоны (Jinja2)
+│   │   ├── layout.html           # Базовый шаблон
+│   │   ├── index.html            # Главная страница
+│   │   ├── procedures.html       # Интерфейс для вызова процедур
+│   │   └── analytics.html        # Визуализация данных
+│   └── static/                   # CSS, JS, изображения (если есть)
+│
+├── requirements.txt              # Зависимости проекта
+└── README.md                     # Документация и описание проекта
+```
+
 ---
 
 ## Как развернуть проект
