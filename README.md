@@ -91,7 +91,8 @@ Pharmacy_Warehouse_Management/
 
 ## Примеры интерфейса
 ### Страница входа
-![Главная страница](screenshots/auth_page.png)
+<img width="429" height="246" alt="image" src="https://github.com/user-attachments/assets/17fdf6f3-273d-4acc-89e6-1ec9ce72eb3a" />
+
 
 ### Главная страница интерфейса
 ![Главная страница](screenshots/base_page.png)
