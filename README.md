@@ -94,8 +94,9 @@ Pharmacy_Warehouse_Management/
 <img width="800" height="500" alt="image" src="https://github.com/user-attachments/assets/17fdf6f3-273d-4acc-89e6-1ec9ce72eb3a" />
 
 
-### Главная страница интерфейса
-![Главная страница](screenshots/base_page.png)
+### Главная страница интерфейса (для пользователя администратор)
+<img width="800" height="500" alt="image" src="https://github.com/user-attachments/assets/aa0bfbc9-c09c-4dfd-8abd-107824cd9abc" />
+
 
 
 ---
