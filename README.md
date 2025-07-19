@@ -26,6 +26,7 @@
 - Удобный интерфейс: отображает только те таблицы и функции, которые доступны в соответствии с ролью пользователя.
 - Вызов процедур через формы: интерфейс поддерживает передачу параметров и отображение результатов выполнения хранимых процедур.
 - Визуальная аналитика: встроенные графики и диаграммы позволяют анализировать динамику поставок, структуру ассортимента прямо в интерфейсе.
+- Обработка ошибок: отклик на неверно введенные данные.
 
 ---
 
@@ -93,10 +94,20 @@ Pharmacy_Warehouse_Management/
 ### Страница входа
 <img width="800" height="500" alt="image" src="https://github.com/user-attachments/assets/17fdf6f3-273d-4acc-89e6-1ec9ce72eb3a" />
 
-
 ### Главная страница интерфейса (для пользователя администратор)
 <img width="800" height="500" alt="image" src="https://github.com/user-attachments/assets/aa0bfbc9-c09c-4dfd-8abd-107824cd9abc" />
 
+### Пример открытия таблицы "Остатки на складе"
+<img width="800" height="500" alt="image" src="https://github.com/user-attachments/assets/b285f1ad-6ab2-4bdb-b1ab-a20f0c2c16b3" />
+
+### Страница с выбором вызова хранимой процедуры
+<img width="800" height="500" alt="image" src="https://github.com/user-attachments/assets/2ae5194f-8a9e-469f-8c10-2515311d75c3" />
+
+### Результат вызова хранимой процедуры "Поставленные препараты в аптеку"
+<img width="800" height="500" alt="image" src="https://github.com/user-attachments/assets/7147532b-f5e9-489e-b865-7586c123f319" />
+
+### Ошибка вызова хранимой процедуры "Поставленные препараты в аптеку"
+<img width="600" height="300" alt="image" src="https://github.com/user-attachments/assets/7e58e9d2-fec1-4293-9088-364a0f55b58c" />
 
 
 ---
