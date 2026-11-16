@@ -14,6 +14,3 @@ BEGIN
 END //
 
 DELIMITER ;
-
-INSERT INTO Supply_pharmacy_items (id_supply, medicine_id, quantity)
-VALUES (1001, 9999, 50);

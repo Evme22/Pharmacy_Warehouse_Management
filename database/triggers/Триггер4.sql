@@ -16,8 +16,3 @@ BEGIN
 END //
 
 DELIMITER ;
-
-INSERT INTO Medicine (medicine_id, medicine_name, manufacturer_id, purpose, group_id, unit, purchase_price, selling_price)
-VALUES (999, 'ТестУдаление', 1, 'тест', 1, 'таблетки', 10.00, 15.00);
-DELETE FROM Medicine WHERE medicine_id = 999;
-DELETE FROM Medicine WHERE medicine_id = 3;

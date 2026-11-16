@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, session, url_for
+from werkzeug.security import check_password_hash
+from flask import Flask, render_template, request, redirect, session, url_for, abort
 from db import get_connection
 import os
 from dotenv import load_dotenv
@@ -7,29 +8,52 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_SECRET_KEY')
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
+
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        username = request.form.get('username', '').strip()
+        password = request.form.get('password', '')
 
-        conn = get_connection()
-        cursor = conn.cursor()
-        cursor.execute("SELECT id, role FROM users WHERE username=%s AND password=%s", (username, password))
-        user = cursor.fetchone()
-        cursor.close()
-        conn.close()
+        if username and password:
+            conn = get_connection()
 
-        if user:
-            session['user_id'] = user[0]
-            session['username'] = username
-            session['role'] = user[1]
-            return redirect('/')
-        else:
-            error = 'Неверный логин или пароль'
+            try:
+                cursor = conn.cursor()
+                try:
+                    cursor.execute(
+                        """
+                        SELECT id, role, password_hash
+                        FROM users
+                        WHERE username = %s
+                        """,
+                        (username,)
+                    )
+                    user = cursor.fetchone()
+                finally:
+                    cursor.close()
+            finally:
+                conn.close()
+
+            if (
+                user
+                and user[1] in ROLE_TABLES
+                and isinstance(user[2], str)
+                and check_password_hash(user[2], password)
+            ):
+                session.clear()
+                session['user_id'] = user[0]
+                session['username'] = username
+                session['role'] = user[1]
+
+                return redirect(url_for('index'))
+
+        error = 'Неверный логин или пароль'
 
     return render_template('login.html', error=error)
+
 
 @app.route('/logout')
 def logout():
@@ -39,7 +63,7 @@ def logout():
 
 @app.route('/')
 def index():
-    if 'username' not in session:
+    if 'user_id' not in session:
         return redirect('/login')
 
     return render_template('index.html', role=session['role'])
@@ -47,6 +71,12 @@ def index():
 
 @app.route('/procedures', methods=['GET', 'POST'])
 def procedures():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    if session.get('role') not in ROLE_TABLES:
+        abort(403)
+
     result = None
     columns = []
     error = None
@@ -149,6 +179,12 @@ def procedures():
 
 @app.route('/analytics')
 def analytics():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    if session.get('role') not in ROLE_TABLES:
+        abort(403)
+
     try:
         conn = get_connection()
         cursor = conn.cursor()
@@ -192,16 +228,62 @@ def analytics():
         return f"Ошибка при построении графиков: {str(e)}"
 
 
+ROLE_TABLES = {
+    'db_admin': {
+        'City', 'Warehouse', 'Pharmacy', 'Position',
+        'Warehouse_employee', 'Supplier',
+        'Supply_to_warehouse', 'Medicine_group',
+        'Manufacturer', 'Medicine',
+        'Supply_to_pharmacy', 'Warehouse_stock',
+        'Supply_warehouse_items', 'Supply_pharmacy_items'
+    },
+    'director': {
+        'Supplier',
+        'Supply_to_warehouse',
+        'Supply_warehouse_items'
+    },
+    'warehouse_clerk': {
+        'Warehouse_stock',
+        'Supply_to_pharmacy',
+        'Supply_pharmacy_items',
+        'Supply_warehouse_items',
+        'Supply_to_warehouse'
+    }
+}
+
+
 @app.route('/table/<table_name>')
 def show_table(table_name):
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    role = session.get('role')
+    allowed_tables = ROLE_TABLES.get(role, set())
+
+    if table_name not in allowed_tables:
+        abort(403)
+
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute(f"SELECT * FROM {table_name}")
-    rows = cursor.fetchall()
-    columns = [col[0] for col in cursor.description]
-    cursor.close()
-    conn.close()
-    return render_template('table_view.html', table=table_name, columns=columns, rows=rows)
+
+    try:
+        cursor.execute(f"SELECT * FROM `{table_name}`")
+        rows = cursor.fetchall()
+        columns = [col[0] for col in cursor.description]
+    finally:
+        cursor.close()
+        conn.close()
+
+    return render_template(
+        'table_view.html',
+        table=table_name,
+        columns=columns,
+        rows=rows
+    )
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(
+        host='127.0.0.1',
+        port=5000,
+        debug=False
+    )

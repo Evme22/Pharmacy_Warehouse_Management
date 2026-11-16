@@ -17,7 +17,6 @@ USE `Pharmacy_Warehouse` ;
 -- -----------------------------------------------------
 -- Table `City`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `City` ;
 
 CREATE TABLE IF NOT EXISTS `City` (
   `city_id` INT NOT NULL AUTO_INCREMENT,
@@ -29,7 +28,6 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 -- Table `Warehouse`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Warehouse` ;
 
 CREATE TABLE IF NOT EXISTS `Warehouse` (
   `warehouse_id` INT NOT NULL AUTO_INCREMENT,
@@ -42,7 +40,6 @@ CREATE TABLE IF NOT EXISTS `Warehouse` (
 -- -----------------------------------------------------
 -- Table `Pharmacy`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Pharmacy` ;
 
 CREATE TABLE IF NOT EXISTS `Pharmacy` (
   `pharmacy_id` INT NOT NULL AUTO_INCREMENT,
@@ -55,7 +52,6 @@ CREATE TABLE IF NOT EXISTS `Pharmacy` (
 -- -----------------------------------------------------
 -- Table `Position`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Position` ;
 
 CREATE TABLE IF NOT EXISTS `Position` (
   `position_id` INT NOT NULL AUTO_INCREMENT,
@@ -66,7 +62,6 @@ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 -- Table `Warehouse_employee`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Warehouse_employee` ;
 
 CREATE TABLE IF NOT EXISTS `Warehouse_employee` (
   `employee_id` INT NOT NULL AUTO_INCREMENT,
@@ -86,7 +81,6 @@ CREATE TABLE IF NOT EXISTS `Warehouse_employee` (
 -- -----------------------------------------------------
 -- Table `Supplier`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Supplier` ;
 
 CREATE TABLE IF NOT EXISTS `Supplier` (
   `supplier_id` INT NOT NULL AUTO_INCREMENT,
@@ -104,7 +98,6 @@ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 -- Table `Supply_to_warehouse`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Supply_to_warehouse` ;
 
 CREATE TABLE IF NOT EXISTS `Supply_to_warehouse` (
   `supply_id` INT NOT NULL AUTO_INCREMENT,
@@ -119,7 +112,6 @@ CREATE TABLE IF NOT EXISTS `Supply_to_warehouse` (
 -- -----------------------------------------------------
 -- Table `Medicine_group`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Medicine_group` ;
 
 CREATE TABLE IF NOT EXISTS `Medicine_group` (
   `group_id` INT NOT NULL AUTO_INCREMENT,
@@ -130,7 +122,6 @@ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 -- Table `Manufacturer`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Manufacturer` ;
 
 CREATE TABLE IF NOT EXISTS `Manufacturer` (
   `manufacturer_id` INT NOT NULL AUTO_INCREMENT,
@@ -141,7 +132,6 @@ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 -- Table `Medicine`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Medicine` ;
 
 CREATE TABLE IF NOT EXISTS `Medicine` (
   `medicine_id` INT NOT NULL AUTO_INCREMENT,
@@ -160,7 +150,6 @@ CREATE TABLE IF NOT EXISTS `Medicine` (
 -- -----------------------------------------------------
 -- Table `Supply_to_pharmacy`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Supply_to_pharmacy` ;
 
 CREATE TABLE IF NOT EXISTS `Supply_to_pharmacy` (
   `id_supply` INT NOT NULL AUTO_INCREMENT,
@@ -175,7 +164,6 @@ CREATE TABLE IF NOT EXISTS `Supply_to_pharmacy` (
 -- -----------------------------------------------------
 -- Table `Warehouse_stock`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Warehouse_stock` ;
 
 CREATE TABLE IF NOT EXISTS `Warehouse_stock` (
   `warehouse_id` INT NOT NULL,
@@ -189,7 +177,6 @@ CREATE TABLE IF NOT EXISTS `Warehouse_stock` (
 -- -----------------------------------------------------
 -- Table `Supply_warehouse_items`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Supply_warehouse_items` ;
 
 CREATE TABLE IF NOT EXISTS `Supply_warehouse_items` (
   `supply_id` INT NOT NULL,
@@ -203,7 +190,6 @@ CREATE TABLE IF NOT EXISTS `Supply_warehouse_items` (
 -- -----------------------------------------------------
 -- Table `Supply_pharmacy_items`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Supply_pharmacy_items` ;
 
 CREATE TABLE IF NOT EXISTS `Supply_pharmacy_items` (
   `id_supply` INT NOT NULL,
