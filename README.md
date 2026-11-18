@@ -4,7 +4,7 @@
 
 A Flask and MySQL application for exploring pharmacy warehouse data, tracking stock movements, querying supply records, and visualizing inventory-related metrics. The project focuses on **relational database design**, **SQL business logic**, **role-aware web access**, and a **reproducible development environment**.
 
-Built as an educational software project and developed further as a technical portfolio piece. This is a working local prototype, not a production-ready pharmaceutical warehouse management system.
+Built as an educational software project. This is a working local prototype.
 
 **Stack:** Python 3.12 · Flask · MySQL 8.4 · SQL stored procedures & triggers · Jinja2 · Chart.js · Docker Compose · pytest
 
@@ -89,8 +89,6 @@ py -3 -m venv .venv
 
 Edit `.env` and **replace the example values** of `MYSQL_ROOT_PASSWORD`, `DB_PASSWORD`, and `FLASK_SECRET_KEY` before starting Docker. Use distinct, strong secrets. You can generate a Flask key with `python -c "import secrets; print(secrets.token_urlsafe(32))"` (or the virtual-environment Python on Windows).
 
-Keep `.env` private: only `.env.example` belongs in Git.
-
 ### 2. Start MySQL and initialize a fresh database
 
 On **macOS / Linux**:
@@ -136,8 +134,6 @@ Open **http://127.0.0.1:5000/** and sign in with the account you created.
 ```bash
 docker compose -p pharmacy-warehouse-polish -f compose.dev.yaml down
 ```
-
-The named MySQL volume is retained. **Do not add `--volumes`** unless you intend to delete that environment's database. Changing passwords in `.env` does not rotate the credentials of an already initialized MySQL volume.
 
 ## Tests
 
@@ -200,7 +196,7 @@ docs/                     Architecture notes
 
 ## Scope and limitations
 
-This repository demonstrates **database-backed application development**, not a certified inventory system or a deployment for real pharmacies.
+This repository demonstrates **database-backed application development**.
 
 - Access to table-view routes is checked by the Flask application; it is **not** a comprehensive MySQL privilege model. Stored-procedure execution is not independently restricted per application role.
 - Shipments to pharmacies are **not equivalent to retail sales**. Top-medicine reports summarize shipped quantities, not point-of-sale transactions.
@@ -211,7 +207,5 @@ This repository demonstrates **database-backed application development**, not a 
 ## About the project
 
 The main engineering focus was designing a connected SQL schema, moving appropriate rules into the database, exposing queries through Flask, and making the project testable and reproducible by another developer.
-
-Source code is published for technical review. **No open-source license is provided**; the repository's public visibility does not itself grant permission to reuse or redistribute the code.
 
 Developed by [Evme22](https://github.com/Evme22).
