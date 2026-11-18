@@ -160,6 +160,4 @@ The project previously passed a full 45-test run during local development. That 
 
 ## 8. Intentional scope
 
-This is a portfolio prototype. It demonstrates MySQL schema design, stored procedures, triggers, Flask integration, and repeatable setup. It is **not** intended for actual pharmaceutical operations without substantial further engineering.
-
 Known boundaries include limited authorization granularity, no complete audit trail, no stock reservations or comprehensive reconciliation, no historical shipment-price snapshots, no full operational order lifecycle, and no production deployment/security guarantees. The demo contains synthetic records and no verified business performance metrics.
