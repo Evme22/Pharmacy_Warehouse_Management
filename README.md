@@ -27,15 +27,15 @@ The project includes **15 database tables**, **4 installed triggers**, and **11 
 
 | Sign in | Administrator dashboard |
 | :---: | :---: |
-| ![Sign-in screen](https://github.com/user-attachments/assets/17fdf6f3-273d-4acc-89e6-1ec9ce72eb3a) | ![Administrator home screen](https://github.com/user-attachments/assets/aa0bfbc9-c09c-4dfd-8abd-107824cd9abc) |
+| ![Sign-in screen](docs/screenshots/login.png) | ![Administrator dashboard](docs/screenshots/dashboard.png) |
 
-| Warehouse stock | Stored procedure selection |
+| Warehouse stock | Stored procedures |
 | :---: | :---: |
-| ![Warehouse stock table](https://github.com/user-attachments/assets/b285f1ad-6ab2-4bdb-b1ab-a20f0c2c16b3) | ![Stored procedure interface](https://github.com/user-attachments/assets/2ae5194f-8a9e-469f-8c10-2515311d75c3) |
+| ![Warehouse stock](docs/screenshots/stock.png) | ![Stored procedures](docs/screenshots/procedures.png) |
 
 | Procedure result | Analytics |
 | :---: | :---: |
-| ![Result of a pharmacy shipment query](https://github.com/user-attachments/assets/7147532b-f5e9-489e-b865-7586c123f319) | ![Analytics charts](https://github.com/user-attachments/assets/1b77db96-849a-46da-ae85-5a3b43aa0fd9) |
+| ![Procedure result](docs/screenshots/procedure-result.png) | ![Analytics](docs/screenshots/analytics.png) |
 
 ## Architecture
 

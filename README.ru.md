@@ -25,17 +25,17 @@
 
 ## Скриншоты интерфейса
 
-| Вход в систему | Главная страница администратора |
+| Вход в систему | Панель администратора |
 | :---: | :---: |
-| ![Страница входа](https://github.com/user-attachments/assets/17fdf6f3-273d-4acc-89e6-1ec9ce72eb3a) | ![Главная страница администратора](https://github.com/user-attachments/assets/aa0bfbc9-c09c-4dfd-8abd-107824cd9abc) |
+| ![Авторизация](docs/screenshots/login.png) | ![Главная страница](docs/screenshots/dashboard.png) |
 
-| Складские остатки | Выбор хранимой процедуры |
+| Складские остатки | Хранимые процедуры |
 | :---: | :---: |
-| ![Таблица складских остатков](https://github.com/user-attachments/assets/b285f1ad-6ab2-4bdb-b1ab-a20f0c2c16b3) | ![Интерфейс вызова процедур](https://github.com/user-attachments/assets/2ae5194f-8a9e-469f-8c10-2515311d75c3) |
+| ![Остатки на складе](docs/screenshots/stock.png) | ![Хранимые процедуры](docs/screenshots/procedures.png) |
 
 | Результат выполнения процедуры | Аналитика |
 | :---: | :---: |
-| ![Результат запроса об отгрузках в аптеку](https://github.com/user-attachments/assets/7147532b-f5e9-489e-b865-7586c123f319) | ![Аналитические диаграммы](https://github.com/user-attachments/assets/1b77db96-849a-46da-ae85-5a3b43aa0fd9) |
+| ![Результат процедуры](docs/screenshots/procedure-result.png) | ![Аналитика](docs/screenshots/analytics.png) |
 
 ## Архитектура
 
