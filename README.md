@@ -1,124 +1,217 @@
 # Pharmacy Warehouse Management System
 
-## Содержание
-- [Описание проекта](#описание-проекта)
-- [Функциональность](#функциональность)
-- [Архитектура проекта](#архитектура-проекта)
-- [Структура проекта](#структура-проекта)
-- [Как развернуть проект](#как-развернуть-проект)
-- [Примеры интерфейса](#примеры-интерфейса)
-- [Результаты](#результаты)
+**English** | [Русский](README.ru.md)
 
----
+A Flask and MySQL application for exploring pharmacy warehouse data, tracking stock movements, querying supply records, and visualizing inventory-related metrics. The project focuses on **relational database design**, **SQL business logic**, **role-aware web access**, and a **reproducible development environment**.
 
-## Описание проекта
-Разработанная информационная система аптечного склада охватывает ключевые процессы логистики, хранения и управления медикаментами. Склад в данной архитектуре выступает как промежуточное звено между поставщиками и филиалами аптек, расположенными в различных городах. Система ведёт учёт остатков, контролирует поставки и хранит информацию о препаратах, их медицинских группах, производителях, поставщиках, сотрудниках и их должностях.
+Built as an educational software project and developed further as a technical portfolio piece. This is a working local prototype, not a production-ready pharmaceutical warehouse management system.
 
-Проект реализует облегчённую версию системы управления аптечным складом с акцентом на продуманную архитектуру базы данных, автоматизацию рутинных операций с помощью хранимых процедур и триггеров, а также предоставляет удобный и минималистичный веб-интерфейс, разработанный на Flask. Интерфейс ориентирован на разные роли пользователей (администратор, директор, кладовщик) и позволяет выполнять аналитику, и просматривать данные в реальном времени.
+**Stack:** Python 3.12 · Flask · MySQL 8.4 · SQL stored procedures & triggers · Jinja2 · Chart.js · Docker Compose · pytest
 
----
+## What the application does
 
-## Функциональность
-- Хранение и управление данными: медикаменты, производители, группы препаратов, поставщики, склады, аптеки, сотрудники, города, поставки и остатки.
-- Бизнес-логика на стороне БД: реализована с помощью SQL-запросов, хранимых процедур и триггеров.
-- Ролевая модель доступа: система различает три типа пользователей - администратор, директор, кладовщик - с разграничением прав и возможностей.
-- Удобный интерфейс: отображает только те таблицы и функции, которые доступны в соответствии с ролью пользователя.
-- Вызов процедур через формы: интерфейс поддерживает передачу параметров и отображение результатов выполнения хранимых процедур.
-- Визуальная аналитика: встроенные графики и диаграммы позволяют анализировать динамику поставок, структуру ассортимента прямо в интерфейсе.
-- Обработка ошибок: отклик на неверно введенные данные.
+A pharmacy warehouse sits between suppliers and pharmacies. The database models incoming deliveries, warehouse stock, and outgoing shipments, with supporting records for medicines, manufacturers, therapeutic groups, suppliers, warehouses, pharmacy locations, and employees.
 
----
+The Flask interface brings these records together in a small, navigable application:
 
-## Архитектура проекта
-- **Backend**: Flask + mysql.connector
-- **Frontend**: HTML + Jinja2 + Chart.js + Bootstrap
-- **Database**: MySQL 
-- **Хранимые процедуры**: 10 реализованных процедур
-- **Права доступа**: разграничены по ролям
+- **Warehouse data:** browse reference tables, incoming deliveries, outgoing shipments, and stock balances.
+- **SQL reporting:** run parameterized stored procedures to filter medicines, analyze movements by period, and explore supplier and shipment data.
+- **Analytics:** view charts for incoming supply trends, frequently shipped medicines, and the distribution of medicine groups.
+- **Application accounts:** log in with a password stored as a `scrypt` hash; use one of three application roles: `db_admin`, `director`, or `warehouse_clerk`.
+- **Server-side checks:** limit access to table-view routes according to the user's application role, rather than relying only on hidden navigation links.
+- **Reproducible setup:** start MySQL with Docker Compose and initialize a fresh demonstration database from the included SQL scripts.
 
----
+The project includes **15 database tables**, **4 installed triggers**, and **11 installed procedures** (10 application procedures and 1 additional validation procedure). The demonstration dataset includes **24 medicines** and synthetic warehouse/supply records.
 
-## Структура проекта
-```text
-Pharmacy_Warehouse_Management/
-│
-├── database/              → SQL-скрипты для создания базы, процедур и триггеров
-│   ├── create_schema.sql         # Структура таблиц и связей
-│   ├── insert_data.sql           # Наполнение базы тестовыми данными
-│   ├── procedures.sql            # Хранимые процедуры
-│   ├── triggers.sql              # Триггеры
-│   ├── user_roles.sql            # Создание пользователей и прав доступа
-│   └── queries.sql               # Примеры аналитических SQL-запросов
-│
-├── er_diagram/
-│   └── er_diagram.png            # ER-диаграмма (структура базы)
-│
-├── app/                          → Веб-приложение на Flask
-│   ├── app.py                    # Точка входа в приложение
-│   ├── db.py                     # Работа с подключением к БД
-│   ├── .env.example              # Пример .env файла для конфигурации
-│   ├── templates/                # HTML-шаблоны (Jinja2)
-│   │   ├── layout.html           # Базовый шаблон
-│   │   ├── index.html            # Главная страница
-│   │   ├── procedures.html       # Интерфейс для вызова процедур
-│   │   └── analytics.html        # Визуализация данных
-│   └── static/                   # CSS, JS, изображения (если есть)
-│
-├── requirements.txt              # Зависимости проекта
-└── README.md                     # Документация и описание проекта
+## Interface preview
+
+| Sign in | Administrator dashboard |
+| :---: | :---: |
+| ![Sign-in screen](https://github.com/user-attachments/assets/17fdf6f3-273d-4acc-89e6-1ec9ce72eb3a) | ![Administrator home screen](https://github.com/user-attachments/assets/aa0bfbc9-c09c-4dfd-8abd-107824cd9abc) |
+
+| Warehouse stock | Stored procedure selection |
+| :---: | :---: |
+| ![Warehouse stock table](https://github.com/user-attachments/assets/b285f1ad-6ab2-4bdb-b1ab-a20f0c2c16b3) | ![Stored procedure interface](https://github.com/user-attachments/assets/2ae5194f-8a9e-469f-8c10-2515311d75c3) |
+
+| Procedure result | Analytics |
+| :---: | :---: |
+| ![Result of a pharmacy shipment query](https://github.com/user-attachments/assets/7147532b-f5e9-489e-b865-7586c123f319) | ![Analytics charts](https://github.com/user-attachments/assets/1b77db96-849a-46da-ae85-5a3b43aa0fd9) |
+
+## Architecture
+
+```mermaid
+flowchart LR
+    U[Browser] -->|HTTP| F[Flask + Jinja2]
+    F -->|mysql-connector-python| DB[(MySQL 8.4)]
+    DB --- S[Tables and foreign keys]
+    DB --- P[Stored procedures]
+    DB --- T[Stock and price triggers]
+    F --> C[Chart.js visualizations]
+    DC[Docker Compose] -.->|Runs locally| DB
 ```
 
----
+The Flask backend handles routing, sessions, authorization checks, and database access. MySQL stores the entities and executes business rules using stored procedures and triggers. The browser renders pages with Jinja2 templates and displays analytics with Chart.js.
 
-## Как развернуть проект
-### Шаги по установке
-1. Клонируйте репозиторий.
-2. Разверните базу данных:  
-Создайте новую базу данных. Последовательно выполните SQL-скрипты из папки database/:
-- create_schema.sql — создание таблиц и связей
-- insert_data.sql — наполнение базы тестовыми данными
-- procedures.sql — хранимые процедуры
-- triggers.sql — триггеры
-- user_roles.sql — создание пользователей и прав доступа (опционально)
-- queries.sql — примеры аналитических запросов (опционально)  
-Это можно сделать через любой SQL-клиент (DBeaver, MySQL Workbench, и др.).
-3. Настройте переменные окружения в файле .env в соответствии с параметрами подключения к БД.
-4. Установите зависимости/библиотеки в среде Pycharm (или любой другой среде, в которой вы работаете)
-5. Запустите приложение:  
-Запуск файла papp.py. По умолчанию приложение будет доступно по адресу: http://127.0.0.1:5000/.
+The database follows a supplier → warehouse → pharmacy flow. Incoming supply items increase stock; outgoing supply items decrease stock and are checked against available quantities. Medicine price validation is also implemented with triggers.
 
----
+![Database ER diagram](database/er-diagram/БД.png)
 
-## Примеры интерфейса
-### Страница входа
-<img width="800" height="500" alt="image" src="https://github.com/user-attachments/assets/17fdf6f3-273d-4acc-89e6-1ec9ce72eb3a" />
+For entity relationships, trigger behavior, SQL design decisions, and implementation limitations, read the [architecture notes](docs/architecture.md).
 
-### Главная страница интерфейса (для пользователя администратор)
-<img width="800" height="500" alt="image" src="https://github.com/user-attachments/assets/aa0bfbc9-c09c-4dfd-8abd-107824cd9abc" />
+## Run locally
 
-### Пример открытия таблицы "Остатки на складе"
-<img width="800" height="500" alt="image" src="https://github.com/user-attachments/assets/b285f1ad-6ab2-4bdb-b1ab-a20f0c2c16b3" />
+**Requirements:** Python 3.12 (the tested development version), Git, and Docker with Docker Compose. The setup has been verified on **macOS**; Windows instructions are provided but have not been independently tested.
 
-### Страница с выбором вызова хранимой процедуры
-<img width="800" height="500" alt="image" src="https://github.com/user-attachments/assets/2ae5194f-8a9e-469f-8c10-2515311d75c3" />
+The commands below assume the repository root as the current directory. The Docker setup binds MySQL to `127.0.0.1:3307`, not to a publicly accessible network interface.
 
-### Результат вызова хранимой процедуры "Поставленные препараты в аптеку"
-<img width="800" height="500" alt="image" src="https://github.com/user-attachments/assets/7147532b-f5e9-489e-b865-7586c123f319" />
+### 1. Clone and configure
 
-### Страница с аналитикой
-<img width="800" height="500" alt="image" src="https://github.com/user-attachments/assets/1b77db96-849a-46da-ae85-5a3b43aa0fd9" />
+**macOS / Linux:**
 
----
+```bash
+git clone https://github.com/Evme22/Pharmacy_Warehouse_Management.git
+cd Pharmacy_Warehouse_Management
+cp .env.example .env
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+```
 
-## Результаты
-В ходе выполнения работы была создана информационная система, которая помогает организовать работу аптечного склада. Главная цель заключалась проектировании и реализации базы данных, в которой можно учитывать поступление медикаментов от поставщиков, их хранение на складах и дальнейшую отправку в аптеки.
+**Windows PowerShell:**
 
-Созданная система охватывает все процессы от учета поставок до контроля остатков на складе. В системе хранится информация о поставщиках, сотрудниках склада, аптеках, складах и городах, в которых они находятся, препаратах и их медицинских группах, о поставках. 
+```powershell
+git clone https://github.com/Evme22/Pharmacy_Warehouse_Management.git
+cd Pharmacy_Warehouse_Management
+Copy-Item .env.example .env
+py -3 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+```
 
-При проектировании БД использовалась нормализация, и все таблицы приведены к третьей нормальной форме. Кроме хранения информации, система позволяет выполнять запросы, такие как, например, находить популярные препараты. Также были реализованы хранимые процедуры и триггеры, которые помогают автоматизировать логику работы с данными. В системе предусмотрены роли пользователей с разными правами доступа. Кладовщик может работать только с поставками и остатками, директор с поставщиками, а администратор может управлять всей системой.
+Edit `.env` and **replace the example values** of `MYSQL_ROOT_PASSWORD`, `DB_PASSWORD`, and `FLASK_SECRET_KEY` before starting Docker. Use distinct, strong secrets. You can generate a Flask key with `python -c "import secrets; print(secrets.token_urlsafe(32))"` (or the virtual-environment Python on Windows).
 
-На основе базы данных был разработан простой и удобный веб-интерфейс. Он позволяет заходить в систему под своей ролью, работать с таблицами, вызывать хранимые процедуры и просматривать аналитические графики. 
+Keep `.env` private: only `.env.example` belongs in Git.
 
-Таким образом, была разработана полноценная система, которая может использоваться для управления аптечным складом. 
+### 2. Start MySQL and initialize a fresh database
 
+On **macOS / Linux**:
 
+```bash
+docker compose -p pharmacy-warehouse-polish -f compose.dev.yaml up -d --wait db
+python scripts/init_demo_db.py
+```
+
+On **Windows PowerShell** (with Docker Desktop running in Linux-container mode):
+
+```powershell
+docker compose -p pharmacy-warehouse-polish -f compose.dev.yaml up -d --wait db
+.\.venv\Scripts\python.exe scripts/init_demo_db.py
+```
+
+The Python installer loads the schema, synthetic data, application-user table, validated triggers, and procedures. It **refuses to run on a nonempty database** rather than overwrite existing records. A failed installation can still leave a partially initialized database; retry on a new empty database.
+
+There are **no pre-created Flask accounts** in a freshly initialized database.
+
+### 3. Create an application account and start Flask
+
+**macOS / Linux:**
+
+```bash
+python app/create_user.py
+python app/app.py
+```
+
+**Windows PowerShell:**
+
+```powershell
+.\.venv\Scripts\python.exe app/create_user.py
+.\.venv\Scripts\python.exe app/app.py
+```
+
+When prompted, choose a username, one of the roles `db_admin`, `director`, or `warehouse_clerk`, and a password containing at least **12 characters**. Password input is hidden and stored as a hash.
+
+Open **http://127.0.0.1:5000/** and sign in with the account you created.
+
+### 4. Stop the database without deleting its data
+
+```bash
+docker compose -p pharmacy-warehouse-polish -f compose.dev.yaml down
+```
+
+The named MySQL volume is retained. **Do not add `--volumes`** unless you intend to delete that environment's database. Changing passwords in `.env` does not rotate the credentials of an already initialized MySQL volume.
+
+## Tests
+
+The repository contains automated Flask tests and MySQL integration tests covering authentication, access restrictions, stored procedures, triggers, and database constraints.
+
+Run the application tests:
+
+```bash
+python -m pytest tests/ -q
+```
+
+To include database integration tests, start and initialize a **disposable test database** first. The integration suite exercises database mutations; do not target important data.
+
+**macOS / Linux:**
+
+```bash
+RUN_DB_TESTS=1 python -m pytest tests/ -q
+```
+
+**Windows PowerShell:**
+
+```powershell
+$env:RUN_DB_TESTS = '1'
+.\.venv\Scripts\python.exe -m pytest tests/ -q
+Remove-Item Env:RUN_DB_TESTS
+```
+
+By default the application reads its connection settings from `.env`. For an isolated database, use a separate Docker Compose project and host port, and set `DB_PORT` to that port for the test process. See the [architecture notes](docs/architecture.md) for the tested SQL behaviors.
+
+## Project layout
+
+```text
+app/
+  app.py                  Flask routes and views
+  db.py                   MySQL connection configuration
+  create_user.py          Interactive user creation
+  templates/              Jinja2 HTML templates
+
+database/
+  Pharmacy_Warehouse.sql  Database schema
+  insert_data/            Synthetic demo data
+  procedures/             SQL stored procedures
+  triggers/               SQL trigger scripts
+  queries/                Additional SQL queries
+  user-roles/             Application user-table schema
+  er-diagram/             ER diagram and MySQL Workbench model
+
+scripts/
+  init_demo_db.py         Cross-platform database installer
+  init_demo_db.sh         Alternative Bash installer
+
+tests/                    Flask and database tests
+compose.dev.yaml          Local MySQL service
+.env.example              Configuration template
+requirements.txt          Pinned direct Python dependencies
+README.md                 English documentation
+README.ru.md              Russian documentation
+docs/                     Architecture notes
+```
+
+## Scope and limitations
+
+This repository demonstrates **database-backed application development**, not a certified inventory system or a deployment for real pharmacies.
+
+- Access to table-view routes is checked by the Flask application; it is **not** a comprehensive MySQL privilege model. Stored-procedure execution is not independently restricted per application role.
+- Shipments to pharmacies are **not equivalent to retail sales**. Top-medicine reports summarize shipped quantities, not point-of-sale transactions.
+- The minimum shipment-value procedure is a **validation utility**, not an automatically enforced rule for every shipment.
+- The prototype does not include a complete production security program, full auditing, stock reconciliation workflows, or historical transaction-price snapshots.
+- Database records are synthetic demonstration data; there is no claim of commercial deployment, real operational load, or measured business impact.
+
+## About the project
+
+The main engineering focus was designing a connected SQL schema, moving appropriate rules into the database, exposing queries through Flask, and making the project testable and reproducible by another developer.
+
+Source code is published for technical review. **No open-source license is provided**; the repository's public visibility does not itself grant permission to reuse or redistribute the code.
+
+Developed by [Evme22](https://github.com/Evme22).
