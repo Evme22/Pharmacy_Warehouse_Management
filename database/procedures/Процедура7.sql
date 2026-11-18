@@ -1,19 +1,25 @@
+
 USE Pharmacy_Warehouse;
+
 DELIMITER //
 
-CREATE PROCEDURE Get_Avg_Selling_Top10()
+CREATE PROCEDURE Get_Top10_Medicines_By_Pharmacy_Supply()
 BEGIN
-    SELECT 
+    SELECT
         m.medicine_name,
-        ROUND(AVG(m.selling_price), 2) AS avg_selling_price,
-        SUM(spi.quantity) AS total_sold
+        m.selling_price AS current_selling_price,
+        SUM(spi.quantity) AS total_supplied
     FROM Supply_pharmacy_items spi
-    JOIN Medicine m ON spi.medicine_id = m.medicine_id
-    GROUP BY spi.medicine_id
-    ORDER BY total_sold DESC
+    JOIN Medicine m
+        ON m.medicine_id = spi.medicine_id
+    GROUP BY
+        m.medicine_id,
+        m.medicine_name,
+        m.selling_price
+    ORDER BY
+        total_supplied DESC,
+        m.medicine_name ASC
     LIMIT 10;
 END //
 
 DELIMITER ;
-
-CALL Get_Avg_Selling_Top10();

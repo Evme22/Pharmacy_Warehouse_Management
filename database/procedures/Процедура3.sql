@@ -21,5 +21,3 @@ BEGIN
 END //
 
 DELIMITER ;
-
-CALL Get_Medicines_By_Manufacturer(1);

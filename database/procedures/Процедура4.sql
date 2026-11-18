@@ -21,5 +21,3 @@ BEGIN
 END //
 
 DELIMITER ;
-
-CALL Get_Supplied_Medicines_By_Pharmacy(3);

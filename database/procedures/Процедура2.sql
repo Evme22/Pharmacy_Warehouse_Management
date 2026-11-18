@@ -18,5 +18,3 @@ BEGIN
 END //
 
 DELIMITER ;
-
-CALL Get_Medicines_By_Price_Range(150, 230);

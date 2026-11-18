@@ -15,5 +15,3 @@ BEGIN
 END //
 
 DELIMITER ;
-
-CALL Get_Most_Demanded_Medicines();

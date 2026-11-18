@@ -6,11 +6,13 @@
 <h4>Динамика поставок по датам</h4>
 <canvas id="lineChart" class="mb-5"></canvas>
 
-<h4>Топ-10 препаратов по объёму поставок</h4>
+<h4>Топ-10 препаратов по объёму отгрузок в аптеки</h4>
 <canvas id="barChart" class="mb-5"></canvas>
 
 <h4>Доля поставок по группам препаратов</h4>
-<canvas id="pieChart" class="mb-5"></canvas>
+<div style="max-width: 640px; height: 380px; margin: 0 auto 32px;">
+    <canvas id="pieChart"></canvas>
+</div>
 
 <script>
     //Линейный график
@@ -47,6 +49,13 @@
     //Круговая диаграмма
     const pieChart = new Chart(document.getElementById('pieChart'), {
         type: 'pie',
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom' }
+            }
+        },
         data: {
             labels: {{ pie_labels|tojson }},
             datasets: [{

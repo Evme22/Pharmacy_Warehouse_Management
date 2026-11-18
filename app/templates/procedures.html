@@ -12,7 +12,7 @@
         <option value="Get_Supplied_Medicines_By_Pharmacy">Поставленные препараты в аптеку</option>
         <option value="Get_Supplied_Medicines_By_Supplier">Поставки от поставщика</option>
         <option value="Get_Medicine_Movement_By_Period">Движение препаратов по дате</option>
-        <option value="Get_Avg_Selling_Top10">Топ-10 препаратов по продажам</option>
+        <option value="Get_Top10_Medicines_By_Pharmacy_Supply">Топ-10 препаратов по отгрузкам в аптеки</option>
         <option value="Get_Top_Suppliers_By_Period">Топ поставщиков за период</option>
         <option value="Get_Most_Demanded_Medicines">Самые востребованные препараты</option>
         <option value="Get_Low_Supply_Medicines_By_Period">Препараты с низкими поставками за период</option>
@@ -99,9 +99,9 @@
     </form>
 </div>
 
-<div id="form_Get_Avg_Selling_Top10" class="procedure-form" style="display: none;">
+<div id="form_Get_Top10_Medicines_By_Pharmacy_Supply" class="procedure-form" style="display: none;">
     <form method="post">
-        <input type="hidden" name="procedure" value="Get_Avg_Selling_Top10">
+        <input type="hidden" name="procedure" value="Get_Top10_Medicines_By_Pharmacy_Supply">
         <p>Выведет топ-10 продаваемых препаратов (по количеству).</p>
         <button type="submit" class="btn btn-outline-primary">Выполнить</button>
     </form>
@@ -186,6 +186,13 @@ document.getElementById("procedureSelect").addEventListener("change", function (
         if (targetForm) targetForm.style.display = "block";
     }
 });
+
+const procedureSelect = document.getElementById("procedureSelect");
+
+procedureSelect.value = {{ (request.form.get('procedure') or 'Get_Medicines_By_Group') | tojson }};
+
+procedureSelect.dispatchEvent(new Event("change"));
+
 </script>
 <a href="/" class="btn btn-secondary mt-4">Назад</a>
 {% endblock %}

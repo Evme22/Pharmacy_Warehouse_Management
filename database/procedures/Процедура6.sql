@@ -16,7 +16,7 @@ BEGIN
         JOIN Supply_to_warehouse stw ON swi.supply_id = stw.supply_id
         WHERE stw.supply_date BETWEEN start_date AND end_date
 
-        UNION
+        UNION ALL
 
         SELECT 
             m.medicine_name,
@@ -31,5 +31,3 @@ BEGIN
 END //
 
 DELIMITER ;
-
-CALL Get_Medicine_Movement_By_Period('2024-01-01', '2024-03-01');

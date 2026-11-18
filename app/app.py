@@ -133,8 +133,8 @@ def procedures():
                     raise ValueError("Введите обе даты.")
                 cursor.callproc('Get_Medicine_Movement_By_Period', [start_date, end_date])
 
-            elif proc == 'Get_Avg_Selling_Top10':
-                cursor.callproc('Get_Avg_Selling_Top10')
+            elif proc == 'Get_Top10_Medicines_By_Pharmacy_Supply':
+                cursor.callproc('Get_Top10_Medicines_By_Pharmacy_Supply')
 
             elif proc == 'Get_Top_Suppliers_By_Period':
                 start_date = request.form.get('start_date')
@@ -199,7 +199,7 @@ def analytics():
         dates = [str(row[0]) for row in data1]
         amounts = [int(row[1]) for row in data1]
 
-        cursor.callproc('Get_Avg_Selling_Top10')
+        cursor.callproc('Get_Top10_Medicines_By_Pharmacy_Supply')
         for result in cursor.stored_results():
             top10 = result.fetchall()
         top_labels = [row[0] for row in top10]

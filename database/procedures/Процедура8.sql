@@ -20,5 +20,3 @@ BEGIN
 END //
 
 DELIMITER ;
-
-CALL Get_Top_Suppliers_By_Period('2024-05-01', '2024-05-31');
